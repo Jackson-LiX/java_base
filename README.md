@@ -1,2 +1,2 @@
-# java_base
+# Java Base
 This is the exercise of java base
