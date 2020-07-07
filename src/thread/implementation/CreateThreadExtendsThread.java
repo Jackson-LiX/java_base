@@ -1,4 +1,4 @@
-package thread;
+package thread.implementation;
 
 /**
  * Create thread by extends thread class
