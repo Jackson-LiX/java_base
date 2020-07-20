@@ -1,0 +1,26 @@
+build/
+bin/
+.settings/
+.gradle/
+.factorypath/
+.springBeans/
+.idea/
+venv/
+
+.git/
+.classpath
+.terraform/
+.project
+**/out/
+*.log
+
+.springBeans
+.factorypath
+
+# IDEs and editors
+*.iml
+/.idea
+.c9/
+*.launch
+*.sublime-workspace
+java_pid*.hprof
