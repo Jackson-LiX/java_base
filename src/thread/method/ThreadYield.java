@@ -15,6 +15,7 @@ public class ThreadYield implements Runnable{
     }
 
     public static void main(String[] args) {
+        // The thread will pause
         ThreadYield yield = new ThreadYield();
         new Thread(yield, "thread1").start();
         new Thread(yield, "thread2").start();

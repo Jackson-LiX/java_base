@@ -17,6 +17,7 @@ public class ThreadSleep implements Runnable{
     }
 
     public static void main(String[] args) throws InterruptedException {
+        // The ThreadSleep will sleep 1s
         Thread t = new Thread(new ThreadSleep());
         t.start();
         System.out.println("main start");

@@ -7,6 +7,7 @@ package thread.method;
  */
 public class ThreadJoin{
     public static void main(String[] args) {
+        // The thread end after thread two end.
         new Thread(new ThreadOne(), "thread1").start();
     }
 }
