@@ -5,8 +5,7 @@ package thread.method;
  *
  * @author jacksonli
  */
-public class ThreadSynchronized implements Runnable{
-
+public class ThreadSynchronizedBlock implements Runnable{
     private int ticketNumber = 99;
     private boolean flag = true;
 
@@ -29,22 +28,25 @@ public class ThreadSynchronized implements Runnable{
     /**
      * Check the ticket number
      */
-    public synchronized void test() {
+    public void test() {
         while (true) {
-            if (ticketNumber <= 0) {
-                flag = false;
-                return;
+            // synchronized code block
+            synchronized (this) {
+                if (ticketNumber <= 0) {
+                    flag = false;
+                    return;
+                }
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                // There will be negative
+                // when the ticket number is 0 , A enter and sleep
+                // then B enter, but the number is also 0, the number has not minus, because A is sleep
+                // B sleep, the A and B awake, the number 0 minus twice
+                System.out.println(Thread.currentThread().getName() + " ----> " + ticketNumber--);
             }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            // There will be negative
-            // when the ticket number is 0 , A enter and sleep
-            // then B enter, but the number is also 0, the number has not minus, because A is sleep
-            // B sleep, the A and B awake, the number 0 minus twice
-            System.out.println(Thread.currentThread().getName() + " ----> " + ticketNumber--);
         }
     }
 
