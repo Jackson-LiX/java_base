@@ -5,13 +5,36 @@ import java.util.List;
 
 /**
  * This is the method to mock booking tickets from cinema
+ *
+ * @author jacksonli
  */
 public class CinemaSynchronizedBlock {
+    public static void main(String[] args) {
+        List<Integer> availablePositions = new ArrayList<>();
+        availablePositions.add(1);
+        availablePositions.add(2);
+        availablePositions.add(3);
+        availablePositions.add(4);
+        availablePositions.add(5);
+        availablePositions.add(6);
+        Cinema cinema = new Cinema(availablePositions, "Cinema");
+        List<Integer> seats1 = new ArrayList<>();
+        seats1.add(1);
+        seats1.add(2);
+        List<Integer> seats2 = new ArrayList<>();
+        seats2.add(3);
+        seats2.add(2);
+        new Thread(new Customer(cinema, seats1)).start();
+        new Thread(new Customer(cinema, seats2)).start();
+    }
+}
+
+class Cinema {
 
     private List<Integer> availablePositions;
     private String name;
 
-    public CinemaSynchronizedBlock(List<Integer> availablePositions, String name) {
+    public Cinema(List<Integer> availablePositions, String name) {
         this.availablePositions = availablePositions;
         this.name = name;
     }
@@ -32,11 +55,11 @@ public class CinemaSynchronizedBlock {
 
 class Customer implements Runnable {
 
-    private final CinemaSynchronizedBlock cinema;
+    private final Cinema cinema;
 
     private final List<Integer> seats;
 
-    public Customer(CinemaSynchronizedBlock cinema, List<Integer> seats) {
+    public Customer(Cinema cinema, List<Integer> seats) {
         this.cinema = cinema;
         this.seats = seats;
     }
@@ -55,23 +78,3 @@ class Customer implements Runnable {
     }
 }
 
-class Test {
-    public static void main(String[] args) {
-        List<Integer> availablePositions = new ArrayList<>();
-        availablePositions.add(1);
-        availablePositions.add(2);
-        availablePositions.add(3);
-        availablePositions.add(4);
-        availablePositions.add(5);
-        availablePositions.add(6);
-        CinemaSynchronizedBlock cinema = new CinemaSynchronizedBlock(availablePositions, "Cinema");
-        List<Integer> seats1 = new ArrayList<>();
-        seats1.add(1);
-        seats1.add(2);
-        List<Integer> seats2 = new ArrayList<>();
-        seats2.add(3);
-        seats2.add(2);
-        new Thread(new Customer(cinema, seats1)).start();
-        new Thread(new Customer(cinema, seats2)).start();
-    }
-}

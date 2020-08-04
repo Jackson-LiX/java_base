@@ -2,7 +2,18 @@ package thread.sample;
 
 /**
  * This is the method to mock booking tickets from station
+ *
+ * @author jacksonli
  */
+public class StationSynchronizedMethod {
+    public static void main(String[] args) {
+        Station station = new Station(2, "Dalian Station");
+        new Passenger(station, "Li", 2).start();
+        new Passenger(station, "Bi", 1).start();
+    }
+}
+
+
 class Station implements Runnable{
 
     private int available;
@@ -38,17 +49,16 @@ class Passenger extends Thread{
 
     int seats;
 
-    // make passenger as a proxy
+    /**
+     * make passenger as a proxy
+     *
+     * @param target
+     * @param name
+     * @param seats
+     */
     public Passenger(Runnable target, String name, int seats) {
         super(target, name);
         this.seats = seats;
     }
 }
 
-public class StationSynchronizedMethod {
-    public static void main(String[] args) {
-        Station station = new Station(2, "Dalian Station");
-        new Passenger(station, "Li", 2).start();
-        new Passenger(station, "Bi", 1).start();
-    }
-}
